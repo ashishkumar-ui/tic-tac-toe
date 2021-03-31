@@ -31,8 +31,8 @@
         const currentCellElm = event.target;
         const currentCellId = currentCellElm.id;
 
-        // if already won, reset and return
-        if(isWon) {
+        // if already won or game over, reset and return
+        if(isWon || isGameOver()) {
             isWon = false;
             return reset();
         }
@@ -87,6 +87,15 @@
             box[boxId].innerHTML = '';
             box[boxId].classList.remove('match');
         }
+    }
+
+    /**
+     * @function 
+     * @desc checks if game is over
+     * @return {boolean}
+     */
+    function isGameOver() {
+        return Object.values(box).every(cell => cell.innerHTML.trim().length !== 0);
     }
 
     // Init
