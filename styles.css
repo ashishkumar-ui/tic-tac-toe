@@ -39,12 +39,43 @@
     }
 }
 
-/* .match:after{
+.match.vertical:after,
+.match.horizontal:after,
+.match.diagonal-r:after,
+.match.diagonal-l:after  {
     content: '';
     position: absolute;
-    top: 50%;
+}
+
+.match.horizontal:after {
+    top: 53.5%;
     left: 0;
     width: 100%;
     border-top: 1px solid #1f8e1f;
     border-bottom: 1px solid #1f8e1f;
-} */
+}
+
+.match.vertical:after {
+    top: 0;
+    left: 50%;
+    height: 100%;
+    border-left: 1px solid #1f8e1f;
+    border-right: 1px solid #1f8e1f;
+}
+
+.match.diagonal-r:after,
+.match.diagonal-l:after {
+    top: -21%;
+    left: 50%;
+    height: 141.4%;
+    border-left: 1px solid #1f8e1f;
+    border-right: 1px solid #1f8e1f;
+}
+
+.match.diagonal-r:after {
+    transform: rotate(45deg);
+}
+
+.match.diagonal-l:after {
+    transform: rotate(-45deg);
+}

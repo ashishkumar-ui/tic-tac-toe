@@ -75,7 +75,34 @@
      * @param {Array} winningBoxes winning row combination
      */
     function highlightWin(winningBoxes) {
-        winningBoxes.forEach(cell => box[cell].classList.add('match'));
+        const winTypes = calcWinType(winningBoxes);
+        winningBoxes.forEach(cell => box[cell].classList.add('match', winTypes));
+    }
+
+    /**
+     * @function
+     * @desc calculate win-types to add strike-out css class to cells
+     * @param {Array} winningBoxes 
+     */
+    function calcWinType(winningBoxes) {
+        const types = {
+            'a3b2c1': 'diagonal-r',
+            'a1b2c3': 'diagonal-l',
+        };
+        const stringifiedBoxes = winningBoxes.sort().join('');
+
+        // diagonal matches
+        if(types[stringifiedBoxes]) {
+            return types[stringifiedBoxes];
+        }
+
+        // horizontal matches
+        if(stringifiedBoxes.replace(/[a-c]/g, '') === '123') {
+            return 'horizontal';
+        }
+
+        // vertical matches
+        return 'vertical';        
     }
 
     /**
@@ -85,7 +112,7 @@
     function reset() {
         for (let boxId in box) {
             box[boxId].innerHTML = '';
-            box[boxId].classList.remove('match');
+            box[boxId].classList.remove('match', 'diagonal-r', 'diagonal-l', 'horizontal', 'vertical');
         }
     }
 
