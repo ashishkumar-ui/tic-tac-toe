@@ -34,7 +34,12 @@
         // if already won or game over, reset and return
         if(isWon || isGameOver()) {
             isWon = false;
+
             return reset();
+        } else if(currentCellElm.innerHTML !== '') {
+
+            // do nothing if cell has value
+            return;
         }
 
         // do next turn
@@ -45,6 +50,11 @@
 
         // switch turn
         turn = turn === '×' ? 'O' : '×';
+
+        // game over CSS
+        if(isGameOver()) {
+            boardElm.classList.add('game-over');
+        }
     }
 
     /**
@@ -110,6 +120,8 @@
      * @desc resets the board
      */
     function reset() {
+        boardElm.classList.remove('game-over');
+
         for (let boxId in box) {
             box[boxId].innerHTML = '';
             box[boxId].classList.remove('match', 'diagonal-r', 'diagonal-l', 'horizontal', 'vertical');
